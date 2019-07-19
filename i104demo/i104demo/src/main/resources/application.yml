@@ -1,0 +1,43 @@
+server:
+  port: 12405
+
+spring: 
+  application: 
+    name: pdstars-i104openmuc-server
+  redis: 
+    database: 0
+    hostName: 127.0.0.1
+    port: 6379
+    password: 
+    pool: 
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+  
+  task: 
+    pool:
+      corePoolSize: 10
+      maxPoolSize: 20
+      keepAliveSeconds: 60
+      queueCapacity: 100
+      threadNamePrefix: myThreadPool 
+#所有节点发布后，默认灰度模式为false。然后把特定的灰度机器上的配置，该参数改成true（表明这台机器是用于灰度验证的）。 
+eureka:
+  instance: 
+    metadata-map: 
+      gated-launch: false
+  client: 
+    serviceUrl: 
+      defaultZone: http://127.0.0.1:8761/eureka/
+      
+hystrix: 
+   metrics: 
+     enabled: false
+   command: 
+      default: 
+         execution: 
+           isolation: 
+             thread: 
+              timeoutInMilliseconds: 120000
